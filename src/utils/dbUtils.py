@@ -1,3 +1,6 @@
+
+"""deprecated: switching to Obsidian output"""
+
 import sqlite3
 from sqlite3 import Error
 import logging
