@@ -1,2 +1,2 @@
-# cherrymap
-Pentesting recon/vuln scan ingestor for CherryTree notes files.
+# Seeker
+Pentesting recon/vuln scan ingestor for CherryTree/Obsidian notes files.
