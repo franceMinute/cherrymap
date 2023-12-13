@@ -1,7 +1,7 @@
 import logging
 
 def parse_log_level(log_level):
-
+    """ Return log level from input arg """
     levels = {
         'DEBUG': logging.DEBUG,
         'INFO': logging.INFO,
