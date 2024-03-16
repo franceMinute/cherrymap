@@ -5,16 +5,19 @@ from parsers.nmapParser import parse_nmap_xml
 
 def main():
     # Argument parsing
-    parser = argparse.ArgumentParser(description='Connect to an SQLite database.')
-    parser.add_argument('--vault', help='Path to Obsidian vault', required=True)
-    parser.add_argument('--log-level', default='INFO', help='Set the logging level (e.g., DEBUG, INFO, WARNING, ERROR, CRITICAL)')
+    parser = argparse.ArgumentParser(description="Parser for nmap output to Obsidan vaults")
+    parser.add_argument("-iX", "--input-xml", help="Path to input XML nmap file", required=True)
+    parser.add_argument("-v", "--vault", help="Path to Obsidian vault", required=True)
+    parser.add_argument("--log-level", default="INFO", help="Set the logging level (e.g., DEBUG, INFO, WARNING, ERROR, CRITICAL)")
     args = parser.parse_args()
 
     # Logging configs
     log_level = parse_log_level(args.log_level)
     logging.basicConfig(level=log_level)
 
-    tmp = parse_nmap_xml(args.vault)
+    nmap_data = parse_nmap_xml(args.input_xml)
+
+    # Export to obsidian
 
     logging.info("Done.")
 
