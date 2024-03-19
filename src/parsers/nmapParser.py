@@ -1,16 +1,14 @@
 import os
+from datetime import datetime
 from lxml import etree
 from utils.nmap import Service, Host, Scope
 
 
 def parse_nmap_xml(xml_file_path):
-    """Parse nmap xml file and retrieve host services json
 
-    REFACTOR THIS LESS BAD
-    """
-    with open(xml_file_path) as xml_file:    
-
-        new_scope = Scope()
+    with open(xml_file_path) as xml_file:
+        current_time = datetime.now().strftime("%m-%d-%y %H:%M:%S")
+        new_scope = Scope(current_time)
         tree = etree.parse(xml_file)
         root = tree.getroot()
 
@@ -20,7 +18,7 @@ def parse_nmap_xml(xml_file_path):
                 status_elem = host.find(".//status")
                 hostnames_elem = host.find(".//hostnames")
                 new_ip = address_elem.get("addr")
-                new_hostname = hostnames_elem.findall(".//hostname[@name]")[0]
+                new_hostname = hostnames_elem.findall(".//hostname[@name]")[0].get("name")
                 new_status = status_elem.get("state")
                 new_host = Host(new_ip, new_hostname, new_status)
                 tmp_services = host.findall(".//ports/port/state[@state=\"open\"]/..")

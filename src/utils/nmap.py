@@ -1,6 +1,7 @@
 class Scope:
-    def __init__(self):
+    def __init__(self, name):
         self.hostlist = []
+        self.name = name
 
     def add_host(self, new_host):
         self.hostlist.append(new_host)
