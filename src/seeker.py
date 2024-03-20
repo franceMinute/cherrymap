@@ -3,7 +3,7 @@ import logging
 from utils.loggingUtils import parse_log_level
 from utils.excel import create_xls_export
 from utils.neo4j import Neo4JConnection
-from parsers.nmapParser import parse_nmap_xml
+from parsers.nmapParser import parse_nmap_into_db, parse_nmap_xml
 
 def main():
     # Argument parsing
@@ -29,8 +29,7 @@ def main():
     if args.db:
         db = Neo4JConnection()
         try:
-            db.create_scan("myScan")
-            db.create_host("10.10.10.0", "scanme.test.local", "up")
+            parse_nmap_into_db(args.input_xml, db)
         finally:
             db.close()
 
